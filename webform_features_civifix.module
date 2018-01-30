@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Webform features is a nice extension for moving webforms from test to
+ * production. Unfortunately, it does not work in combination with civicrm_webform
+ * This module provides a fix.
+ * @author Klaas Eikelboom
+ */
+
+/**
+ * Implements hook_webform_component_presave().
+ */
+function webform_features_civifix_webform_component_presave(&$component) {
+  if (empty($component['machine_name'])) {
+    $webform = db_select('webform', 'wf')
+      ->fields('wf', array('machine_name'))
+      ->condition('nid', $component['nid'])
+      ->execute()
+      ->fetch();
+    $component['machine_name'] = $webform->machine_name . '-' . $component['form_key'];
+  }
+}

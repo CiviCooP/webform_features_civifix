@@ -1,0 +1,8 @@
+name = Webform Features CiviFix
+description = Makes Webform Features en Webform CiviCRM work together
+core = 7.x
+package = CiviCRM
+version = 7.x-1.0-alpha
+
+dependencies[] = webform_features
+dependencies[] = webform_civicrm
